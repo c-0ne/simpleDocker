@@ -1,0 +1,35 @@
+# create a docker compose with nextcloud and a database with mariadb
+
+services:
+  db:
+    image: mariadb:10.5
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - ./nc-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=asd4as781d871asd8a71sd87
+      - MYSQL_PASSWORD=asd4as781d871asd8a71sd87
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: nextcloud
+    restart: always
+    ports:
+      - 4531:80
+    volumes:
+      - ./nc-storage:/var/www/html/data
+      - ./nc-config:/var/www/html/config
+    environment:
+      - MYSQL_PASSWORD=asd4as781d871asd8a71sd87
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db
+      - NEXTCLOUD_ADMIN_USER=adminUser
+      - NEXTCLOUD_ADMIN_PASSWORD=bJhqi6VAC48Z58HrRXWP
+      - NEXTCLOUD_TRUSTED_DOMAINS=example.com # change this to your domain
+      - OVERWRITECLIURL=https://example.com # change this to your domain
+      - OVERWRITEPROTOCOL=https
+    depends_on:
+      - db

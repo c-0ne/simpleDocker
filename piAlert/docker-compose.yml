@@ -1,0 +1,10 @@
+services:
+    pi.alert:
+        network_mode: host
+        volumes:
+            - ./config:/home/pi/pialert/config
+            - ./db:/home/pi/pialert/db
+        environment:
+            - TZ=Europe/Zurich
+            - PORT=20211
+        image: jokobsk/pi.alert:latest

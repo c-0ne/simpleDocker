@@ -1,0 +1,15 @@
+services:
+    linuxserver:
+        container_name: vscode
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - SUDO_PASSWORD=password # set your password here
+            - PASSWORD=password # set your password here
+            - TZ=Europe/Zurich
+        ports:
+            - '8443:8443'
+        volumes:
+            - './vscode:/config'
+        restart: unless-stopped
+        image: 'lscr.io/linuxserver/code-server:latest'

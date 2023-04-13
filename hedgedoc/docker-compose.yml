@@ -1,0 +1,30 @@
+services:
+  hedgedoc:
+    image: lscr.io/linuxserver/hedgedoc:latest
+    container_name: hedgedoc
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=hedgedoc
+      - DB_PASS=password
+      - DB_NAME=hedgedoc
+      - TZ=Europe/Zurich
+      - CMD_DOMAIN=127.0.0.1
+      - CMD_PORT=3000 #optional
+      - CMD_ALLOW_ORIGIN=['*'] #optional
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+  # database for hedgedoc
+  db:
+    image: mariadb:latest
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=hedgedoc
+      - MYSQL_USER=hedgedoc
+      - MYSQL_PASSWORD=password
+    restart: unless-stopped

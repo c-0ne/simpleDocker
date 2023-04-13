@@ -1,0 +1,12 @@
+services:
+  webdav:
+    image: bytemark/webdav
+    restart: unless-stopped
+    ports:
+      - "3398:80"
+    environment:
+      AUTH_TYPE: Digest
+      USERNAME: username # set your username
+      PASSWORD: password # set your password
+    volumes:
+      - ./storage:/var/lib/dav

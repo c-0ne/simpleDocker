@@ -1,0 +1,13 @@
+# link: https://hub.docker.com/r/kibatic/proftpd
+
+services:
+    proftpd:
+        environment:
+            - 'FTP_LIST=user:password' # set your user and password
+            - MASQUERADE_ADDRESS=0.0.0.0 # set your ip address
+        volumes:
+            - './ftpDir:/home/user' # set your ftp directory, should be the same as the username in FTP_LIST
+        image: kibatic/proftpd
+        ports:
+            - '5689:21'
+            - '50000-50100:50000-50100'

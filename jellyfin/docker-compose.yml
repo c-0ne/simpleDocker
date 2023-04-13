@@ -1,0 +1,9 @@
+services:
+    jellyfin:
+        image: jellyfin/jellyfin
+        ports:
+            - '8096:8096'
+        volumes:
+            - './media:/volume' # set to your media folder
+        container_name: jellyfin
+        restart: always

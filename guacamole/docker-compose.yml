@@ -1,0 +1,9 @@
+services:
+    guacamole:
+        image: oznu/guacamole
+        volumes:
+            - ./config:/config
+        ports:
+            - 8080:8080
+        container_name: guacamole
+        restart: always
